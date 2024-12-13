@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Search System</title>
+    <style>
+
+* {
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+}
+/* General styling for the container */
+.container {
+    display: flex; /* Flexbox for alignment */
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    min-height: 100vh; /* Full height of the viewport */
+    padding: 20px;
+    background-color: #f4f4f4; /* Optional: subtle background color */
+}
+
+/* Styling for each search area */
+.search-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px; /* Restrict the width */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-area h2 {
+    text-align: center;
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+textarea, input[type="file"], input[type="text"] {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+    resize: none;
+}
+
+textarea:focus, input[type="file"]:focus, input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    background-color: #003d80;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    textarea, input[type="file"], input[type="text"], button {
+        font-size: 0.9rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-area" style="gap: 10px">
+            <h2>Find Decklist Images</h2>
+            <textarea id="decklistSearch" placeholder="Enter decklist or upload a file..." rows="2"></textarea>
+            <input type="file" id="decklistFile" accept=".txt">
+            <textarea id="deckName" rows="1"  placeholder="Enter decklist name, in case its a file, it will use the file name to create a deck name."></textarea>
+            
+            <label for="keepLocal">
+                <input type="checkbox" id="keepLocal" name="locally"/>Keep a local copy
+            </label>            
+            
+            <button onclick="searchDecklist()">Search Decklist</button>
+
+        </div>
+    </div>
+    <script>
+        function searchCard() {
+        const cardName = document.getElementById('cardSearch').value;
+        
+        fetch('/search_card', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'card_name=' + encodeURIComponent(cardName)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Handle the response data here
+        });
+    }
+
+    function searchCard() {
+        const cardName = document.getElementById('cardSearch').value;
+        
+        fetch('/search_card', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'card_name=' + encodeURIComponent(cardName)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        });
+    }
+
+    function searchDecklist() {
+            let decklist = document.getElementById('decklistSearch').value;
+            const decklistFile = document.getElementById('decklistFile').files[0];
+            let deckName = document.getElementById('deckName').value;
+
+            if (decklistFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    decklist = e.target.result;
+                    sendDecklistToServer(decklist);
+                };
+                reader.readAsText(decklistFile);
+            } else {
+                sendDecklistToServer(decklist, deckName);
+            }
+        }
+
+        function sendDecklistToServer(decklist, deckName) {
+            fetch('/search_decklist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'decklist=' + encodeURIComponent(decklist) + '&deckName=' + encodeURIComponent(deckName)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            });
+        }
+    </script>
+</body>
+</html>

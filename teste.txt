@@ -1,0 +1,79 @@
+1 Azorius Chancery
+1 Seaside Citadel
+1 Gavony Township
+8 Forest
+8 Island
+8 Plains
+1 Exotic Orchard
+1 Seaside Haven
+1 Selesnya Sanctuary
+1 Animal Sanctuary
+1 Temple of the False God
+1 Command Tower
+1 Reliquary Tower
+1 Sol Ring
+1 Wild Growth
+1 Dispel
+1 Healer's Hawk
+1 Judge's Familiar
+1 Battlefield Raptor
+1 Soulcatcher
+1 Swiftfoot Boots
+1 Augury Owl
+1 Rampant Growth
+1 Duskrider Falcon
+1 Cartographer's Hawk
+1 Freewind Falcon
+1 Mindshrieker
+1 War Screecher
+1 Negate
+1 Soulcatchers' Aerie
+1 Watcher of the Spheres
+1 Bower Passage
+1 River Hoopoe
+1 Azorius Signet
+1 Selesnya Signet
+1 Simic Signet
+1 Fertile Ground
+1 Favorable Winds
+1 Coast Watcher
+1 Empyrean Eagle
+1 Stormwild Capridor
+1 Azorius Keyrune
+1 Cultivate
+1 Keeper of the Nine Gales
+1 Derevi, Empyrial Tactician
+1 Commander's Sphere
+1 Cloudchaser Kestrel
+1 Warden of Evos Isle
+1 Aven Mindcensor
+1 Flurry of Wings
+1 Kangee's Lieutenant
+1 Cloudchaser Eagle
+1 Aven Augur
+1 High Sentinels of Arashin
+1 Empowered Autogenerator
+1 Aven Cloudchaser
+1 Commander Eesha
+1 Mist Raven
+1 Aven Wind Guide
+1 Ishai, Ojutai Dragonspeaker
+1 Reconnaissance Mission
+1 Skymark Roc
+1 Treetop Sentinel
+1 Airborne Aid
+1 Aven Smokeweaver
+1 Return to Dust
+1 Aven Gagglemaster
+1 Kangee, Sky Warden
+1 Time Wipe
+1 Aerie Mystics
+1 Steel-Plume Marshal
+1 Celestial Gatekeeper
+1 Migratory Route
+1 Gustcloak Savior
+1 Crookclaw Elder
+1 Dovescape
+1 Windbrisk Raptor
+1 Beck
+1 Dusk
