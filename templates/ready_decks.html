@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Decks</title>
+    <style>
+        * {
+            font-size: 1rem;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .search-area {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .search-area h2 {
+            text-align: center;
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .deck-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .deck-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .download-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+        .clean-nav-btn{
+            display: block;
+            /* width: 96%; */
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            outline-style: hidden;
+            outline: none;
+            border: none;
+            margin-bottom: 10px;
+
+        }
+        .clean-nav-btn:hover {
+            background-color: #218838;
+        }
+        .nav-btn {
+            display: block;
+            width: 96%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+
+        }
+        .nav-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-area">
+            <h2>Available Decks</h2>
+            {% if decks == "Let's create your first deck!" %}
+                <div class="deck-item">
+                    <p>{{ decks }}</p>
+                </div>
+            {% else %}
+                <ul class="deck-list">
+                    {% for deck in decks %}
+                    <li class="deck-item">
+                        <span>{{ deck }}</span>
+                        <a href="{{ url_for('download_deck', filename=deck) }}" class="download-btn">Download</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+                <button onclick="cleanFolder()" class="clean-nav-btn">Clean Folder</button>
+                <a href="{{ url_for('index') }}" class="nav-btn">Back to Search</a>
+        </div>
+    </div>
+
+<script>
+    function cleanFolder() {
+        fetch('/clean_folder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Folder cleaned:', data);
+            location.reload(); // Refresh the page to show empty folder
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+
+</script>
+</body>
+</html>

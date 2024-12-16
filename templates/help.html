@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Search System - Help</title>
+    <style>
+        * {
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .help-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .help-section {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="help-container">
+        <h1>Help Guide</h1>
+        
+        <div class="help-section">
+            <h2>How to Use the Card Search System</h2>
+            <ol>
+                <li>Enter your decklist in the text area</li>
+                <li>Provide a name for your deck. If not provided, it will generate a deckname based upon the timestamp</li>
+                <li>Click "Search Decklist" to process your cards</li>
+                <li>View your processed deck in the "Ready Decks" section</li>
+            </ol>
+        </div>
+
+        <div class="help-section">
+            <h2>Decklist Format</h2>
+            <p>Your decklist should follow this format:</p>
+            <code>
+            4 Lightning Bolt<br>
+                3 Mountain<br>
+                2 Goblin Guide
+            </code>
+            <p>Each line should start with the quantity followed by the card name.</p>
+            <h3>Advanced Search</h3>
+            <p>You can also add some details, like the set and collectors number, like this:</p>
+            <code>4 Lightning Bolt slp 21<br>
+                3 Mountain PIP 324<br>
+                1 Goblin Guide 2xm 127<br>
+                1 Goblin Guide slp 23
+            </code>
+            <p>Each line should start with the quantity followed by the card name, then the set code, and lastly, the collectors number.</p>
+        </div>
+
+        <div class="help-section">
+            <h2>Tips</h2>
+            <ul>
+                <li>Use exact card names for best results</li>
+                <li>Make sure quantities are numbers</li>
+                <li>Check "Ready Decks" to see your processed decklists</li>
+            </ul>
+        </div>
+
+        <a href="/" class="back-button">Back to Search</a>
+    </div>
+</body>
+</html>

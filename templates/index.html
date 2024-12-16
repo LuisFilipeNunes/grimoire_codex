@@ -10,6 +10,30 @@
     font-size: 1rem;
     font-family: 'Arial', sans-serif;
 }
+
+.help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.help-button:hover {
+    background-color: #0056b3;
+}
+
 /* General styling for the container */
 .container {
     display: flex; /* Flexbox for alignment */
@@ -81,6 +105,38 @@ button:active {
     background-color: #003d80;
 }
 
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background-color: #ff4444;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.notification.show {
+    opacity: 1;
+}
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /* Responsive adjustments */
 @media (max-width: 480px) {
     .container {
@@ -99,81 +155,88 @@ button:active {
         <div class="search-area" style="gap: 10px">
             <h2>Find Decklist Images</h2>
             <textarea id="decklistSearch" placeholder="Enter decklist or upload a file..." rows="2"></textarea>
-            <input type="file" id="decklistFile" accept=".txt">
-            <textarea id="deckName" rows="1"  placeholder="Enter decklist name, in case its a file, it will use the file name to create a deck name."></textarea>
+            <!-- <input type="file" id="decklistFile" accept=".txt"> -->
+            <textarea id="deckName" rows="1"  placeholder="Enter decklist name."></textarea>
             
-            <label for="keepLocal">
+            <!-- <label for="keepLocal">
                 <input type="checkbox" id="keepLocal" name="locally"/>Keep a local copy
-            </label>            
+            </label>             -->
             
-            <button onclick="searchDecklist()">Search Decklist</button>
+            <button id="searchButton" onclick="searchDecklist()">   
+                <span id="buttonText">Search Decklist</span>
+                <div id="loadingSpinner" class="spinner" style="display: none;"></div>
+            </button>
+            
+            <button onclick="window.location.href='{{ url_for('ready_decks') }}'" class="nav-btn" style="margin-top: 10px;">View Ready Decks</button>
+
 
         </div>
     </div>
+    <div id="notification" class="notification"></div>
     <script>
-        function searchCard() {
-        const cardName = document.getElementById('cardSearch').value;
-        
-        fetch('/search_card', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'card_name=' + encodeURIComponent(cardName)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            // Handle the response data here
-        });
-    }
 
-    function searchCard() {
-        const cardName = document.getElementById('cardSearch').value;
-        
-        fetch('/search_card', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'card_name=' + encodeURIComponent(cardName)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        });
-    }
+        function searchDecklist() {
+            const button = document.getElementById('searchButton');
+            const buttonText = document.getElementById('buttonText');
+            const spinner = document.getElementById('loadingSpinner');
+            
+            buttonText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            button.disabled = true;
 
-    function searchDecklist() {
             let decklist = document.getElementById('decklistSearch').value;
-            const decklistFile = document.getElementById('decklistFile').files[0];
             let deckName = document.getElementById('deckName').value;
 
-            if (decklistFile) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    decklist = e.target.result;
-                    sendDecklistToServer(decklist);
-                };
-                reader.readAsText(decklistFile);
-            } else {
-                sendDecklistToServer(decklist, deckName);
+            if (!decklist) {
+                showNotification('Please enter a decklist!!');
+                // Reset button if validation fails
+                buttonText.style.display = 'inline-block';
+                spinner.style.display = 'none';
+                button.disabled = false;
+                return;
             }
+
+            sendDecklistToServer(decklist, deckName);
         }
 
-        function sendDecklistToServer(decklist, deckName) {
-            fetch('/search_decklist', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'decklist=' + encodeURIComponent(decklist) + '&deckName=' + encodeURIComponent(deckName)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            });
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
+
+
+            function sendDecklistToServer(decklist, deckName) {
+                const trimmedDeckName = deckName ? deckName.trim() : '';
+                fetch('/search_decklist', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'decklist=' + encodeURIComponent(decklist) + '&deckName=' + encodeURIComponent(trimmedDeckName)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    window.location.href = '/ready_decks';
+                })
+                .catch(error => {
+                    // Reset button on error
+                    const buttonText = document.getElementById('buttonText');
+                    const spinner = document.getElementById('loadingSpinner');
+                    const button = document.getElementById('searchButton');
+                    
+                    buttonText.style.display = 'inline-block';
+                    spinner.style.display = 'none';
+                    button.disabled = false;
+                });
+            }
     </script>
+    <button class="help-button" onclick="window.location.href='/help'">?</button>
+
 </body>
 </html>
