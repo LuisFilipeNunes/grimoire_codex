@@ -15,7 +15,7 @@ class Deck:
         self.decklist = None
         self.card_error = 0
         self.json_data_path = None
-        self.deck_size = len(self.cards)
+        self.deck_size = 0
 
         # Set deck name or generate timestamp-based name if none provided
         if deckName:
@@ -27,7 +27,8 @@ class Deck:
         # Creates Card objects from decklist and adds them to the deck
         for card in decklist:
             self.cards.append(Card(card))
-        self.deck_size = len(self.cards)
+
+        self.deck_size = sum(card.quantity for card in self.cards)
 
     def get_card_collection(self):
         # Main method to fetch card data and images from Scryfall API
