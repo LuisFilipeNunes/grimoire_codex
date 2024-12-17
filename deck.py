@@ -15,8 +15,8 @@ class Deck:
         self.decklist = None
         self.card_error = 0
         self.json_data_path = None
-
         self.deck_size = len(self.cards)
+
         # Set deck name or generate timestamp-based name if none provided
         if deckName:
             self.name = deckName
@@ -37,8 +37,7 @@ class Deck:
         self.__construct_data_file()
         self.__check_not_found()
         self.__download_images()
-
-    
+   
     def __build_identifiers(self) -> json:
         # Builds API request identifiers based on card info
         all_identifiers = []
@@ -121,9 +120,13 @@ class Deck:
                 self.__log_error()
                 self.__addendum_info(f"Card {card.name}, with the set {card.set_code} and collector's number: {card.collector} does not have a valid image URL. Its probably the wrong set code or collector number.")
 
-
     def __construct_data_file(self):
         file_path = os.path.join(self.build_directory(), "deck-info.txt")
+        with open(file_path, 'w', encoding='utf-8') as file:
+            file.write(f"Deck Name: {self.name}\n")
+            file.write(f"Deck Size: {self.deck_size}\n")
+            file.write("Decklist: \n")
+            
         for card in self.cards:
             with open(file_path, 'a', encoding='utf-8') as file:
                 file.write(f"{card.quantity} {card.name} {card.set_code or ''} {card.collector or ''}\n")

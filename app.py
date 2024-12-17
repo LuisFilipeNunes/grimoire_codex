@@ -1,4 +1,6 @@
 from flask import Flask, render_template, jsonify, request, send_file
+from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime, timedelta
 from deck import DeckBox
 import os
 import shutil
@@ -66,6 +68,21 @@ def clean_folder():
 def help():
     return render_template('help.html')
 
+
+def cleanup_old_files():
+    folder_path = 'decks'
+    threshold = datetime.now() - timedelta(minutes=30)
+    
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        if os.path.isfile(file_path):
+            file_time = datetime.fromtimestamp(os.path.getctime(file_path))
+            if file_time < threshold:
+                os.remove(file_path)
+
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=cleanup_old_files, trigger="interval", minutes=5)
+scheduler.start()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000, debug=True)
