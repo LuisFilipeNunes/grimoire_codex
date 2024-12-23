@@ -4,57 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Search System - Help</title>
-    <style>
-        * {
-            font-family: 'Arial', sans-serif;
-        }
-        
-        .help-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .help-section {
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            color: #007bff;
-            text-align: center;
-        }
-
-        h2 {
-            color: #333;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 5px;
-        }
-
-        .back-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-
-        .back-button:hover {
-            background-color: #0056b3;
-        }
-
-        code {
-            background-color: #f0f0f0;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: monospace;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="help-container">
@@ -106,6 +56,17 @@
                 <li>Use exact card names for best results</li>
                 <li>Make sure quantities are numbers</li>
                 <li>Check "Ready Decks" to see your processed decklists</li>
+                <li>To search for cards with uncommon layouts (Transform, modal, adventure...) use only the front card name. <br>i. e.:
+                    <code>
+                       <br>1 Murderous Rider<br> for <br>1 Murderous Rider // Swift End 
+                    </code>
+                     </li>
+                <li>This Version does not Suport cards of the Meld Mechanic. <br>To use cards with the Meld Mechanic, you must put the three cards on it:<br>
+                    <code>
+                        <br>1 Bruna, the Fading Light
+                        <br>1 Gisela, the Broken Blade
+                        <br>1 Brisela, Voice of Nightmares
+                    </code></li>
             </ul>
         </div>
 

@@ -4,151 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Search System</title>
-    <style>
-
-* {
-    font-size: 1rem;
-    font-family: 'Arial', sans-serif;
-}
-
-.help-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #007bff;
-    color: white;
-    font-size: 20px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
-}
-
-.help-button:hover {
-    background-color: #0056b3;
-}
-
-/* General styling for the container */
-.container {
-    display: flex; /* Flexbox for alignment */
-    justify-content: center; /* Horizontal centering */
-    align-items: center; /* Vertical centering */
-    min-height: 100vh; /* Full height of the viewport */
-    padding: 20px;
-    background-color: #f4f4f4; /* Optional: subtle background color */
-}
-
-/* Styling for each search area */
-.search-area {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 500px; /* Restrict the width */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.search-area h2 {
-    text-align: center;
-    color: #333;
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    font-family: 'Arial', sans-serif;
-}
-
-textarea, input[type="file"], input[type="text"] {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-family: 'Arial', sans-serif;
-    box-sizing: border-box;
-    resize: none;
-}
-
-textarea:focus, input[type="file"]:focus, input[type="text"]:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    font-size: 1rem;
-    font-family: 'Arial', sans-serif;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-button:active {
-    background-color: #003d80;
-}
-
-.notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px 25px;
-    background-color: #ff4444;
-    color: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    z-index: 1000;
-}
-
-.notification.show {
-    opacity: 1;
-}
-.spinner {
-    width: 20px;
-    height: 20px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #3498db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    display: inline-block;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-    .container {
-        padding: 15px;
-    }
-
-    textarea, input[type="file"], input[type="text"], button {
-        font-size: 0.9rem;
-    }
-}
-
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
@@ -156,86 +12,25 @@ button:active {
             <h2>Find Decklist Images</h2>
             <textarea id="decklistSearch" placeholder="Enter decklist or upload a file..." rows="2"></textarea>
             <!-- <input type="file" id="decklistFile" accept=".txt"> -->
-            <textarea id="deckName" rows="1"  placeholder="Enter decklist name."></textarea>
+            <textarea id="deckName" rows="1"  placeholder="Enter decklist name, without whitespaces."></textarea>
             
             <!-- <label for="keepLocal">
                 <input type="checkbox" id="keepLocal" name="locally"/>Keep a local copy
             </label>             -->
             
-            <button id="searchButton" onclick="searchDecklist()">   
+            <button id="searchButton" onclick="searchDecklist()" class="nav-btn">   
                 <span id="buttonText">Search Decklist</span>
                 <div id="loadingSpinner" class="spinner" style="display: none;"></div>
             </button>
             
-            <button onclick="window.location.href='{{ url_for('ready_decks') }}'" class="nav-btn" style="margin-top: 10px;">View Ready Decks</button>
+            <button onclick="window.location.href='{{ url_for('ready_decks') }}'" class="nav-btn" style="margin-top: 10px;">View Available Decks</button>
 
 
         </div>
     </div>
     <div id="notification" class="notification"></div>
-    <script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 
-        function searchDecklist() {
-            const button = document.getElementById('searchButton');
-            const buttonText = document.getElementById('buttonText');
-            const spinner = document.getElementById('loadingSpinner');
-            
-            buttonText.style.display = 'none';
-            spinner.style.display = 'inline-block';
-            button.disabled = true;
-
-            let decklist = document.getElementById('decklistSearch').value;
-            let deckName = document.getElementById('deckName').value;
-
-            if (!decklist) {
-                showNotification('Please enter a decklist!!');
-                // Reset button if validation fails
-                buttonText.style.display = 'inline-block';
-                spinner.style.display = 'none';
-                button.disabled = false;
-                return;
-            }
-
-            sendDecklistToServer(decklist, deckName);
-        }
-
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-
-            function sendDecklistToServer(decklist, deckName) {
-                const trimmedDeckName = deckName ? deckName.trim() : '';
-                fetch('/search_decklist', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'decklist=' + encodeURIComponent(decklist) + '&deckName=' + encodeURIComponent(trimmedDeckName)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                    window.location.href = '/ready_decks';
-                })
-                .catch(error => {
-                    // Reset button on error
-                    const buttonText = document.getElementById('buttonText');
-                    const spinner = document.getElementById('loadingSpinner');
-                    const button = document.getElementById('searchButton');
-                    
-                    buttonText.style.display = 'inline-block';
-                    spinner.style.display = 'none';
-                    button.disabled = false;
-                });
-            }
-    </script>
     <button class="help-button" onclick="window.location.href='/help'">?</button>
 
 </body>
