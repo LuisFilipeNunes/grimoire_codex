@@ -1,79 +1,95 @@
-1 Azorius Chancery
-1 Seaside Citadel
-1 Gavony Township
-8 Forest
-8 Island
-8 Plains
-1 Exotic Orchard
-1 Seaside Haven
-1 Selesnya Sanctuary
-1 Animal Sanctuary
-1 Temple of the False God
+1 Academy Manufactor
+1 Adarkar Wastes
+1 Ainok Bond-Kin
+1 An Offer You Can't Refuse
+1 Arcane Denial
+1 Arcane Signet
+1 Archway of Innovation
+1 Ascend from Avernus
+1 Bennie Bracks, Zoologist
+1 Boseiju, Who Endures
+1 Bountiful Promenade
+1 Breeding Pool
+1 Brushland
 1 Command Tower
-1 Reliquary Tower
+1 Counterspell
+1 Danny Pink
+1 Disorder in the Court
+1 Dovin's Veto
+1 Exotic Orchard
+1 Faithful Watchdog
+1 Farseek
+1 Flare of Fortitude
+1 Flooded Strand
+4 Forest
+1 Gavony Township
+1 Get Lost
+1 Glacial Fortress
+1 Greater Tanuki
+1 Hallowed Fountain
+1 Heroic Intervention
+1 Hinterland Harbor
+1 Idol of Oblivion
+1 Inspiring Call
+2 Island
+1 Jaheira, Friend of the Forest
+1 K-9, Mark I
+1 Krark-Clan Ironworks
+1 Krosan Verge
+1 Lightning Greaves
+1 Longshot Squad
+1 Lonis, Genetics Expert
+1 Loyal Warhound
+1 Masked Vandal
+1 Maskwood Nexus
+1 Merchant of Truth
+1 Misty Rainforest
+1 Mowu, Loyal Companion
+1 Mushroom Watchdogs
+1 Nature's Lore
+1 Night of the Sweets' Revenge
+1 Nuka-Cola Vending Machine
+1 Officious Interrogation
+1 Otawara, Soaring City
+1 Ozolith, the Shattered Spire
+1 Pack Leader
+1 Path to Exile
+1 Peregrin Took
+1 Phelia, Exuberant Shepherd
+2 Plains
+1 Rejuvenating Springs
+1 Release the Dogs
+1 Rhystic Study
+1 Rosie Cotton of South Lane
+1 Samwise Gamgee
+1 Sarinth Steelseeker
+1 Sea of Clouds
+1 Selfless Savior
 1 Sol Ring
-1 Wild Growth
-1 Dispel
-1 Healer's Hawk
-1 Judge's Familiar
-1 Battlefield Raptor
-1 Soulcatcher
+1 Sophia, Dogged Detective
+1 Spara's Headquarters
+1 Spire of Industry
+1 Spirited Companion
+1 Stroke of Midnight
+1 Sunpetal Grove
+1 Supreme Verdict
 1 Swiftfoot Boots
-1 Augury Owl
-1 Rampant Growth
-1 Duskrider Falcon
-1 Cartographer's Hawk
-1 Freewind Falcon
-1 Mindshrieker
-1 War Screecher
-1 Negate
-1 Soulcatchers' Aerie
-1 Watcher of the Spheres
-1 Bower Passage
-1 River Hoopoe
-1 Azorius Signet
-1 Selesnya Signet
-1 Simic Signet
-1 Fertile Ground
-1 Favorable Winds
-1 Coast Watcher
-1 Empyrean Eagle
-1 Stormwild Capridor
-1 Azorius Keyrune
-1 Cultivate
-1 Keeper of the Nine Gales
-1 Derevi, Empyrial Tactician
-1 Commander's Sphere
-1 Cloudchaser Kestrel
-1 Warden of Evos Isle
-1 Aven Mindcensor
-1 Flurry of Wings
-1 Kangee's Lieutenant
-1 Cloudchaser Eagle
-1 Aven Augur
-1 High Sentinels of Arashin
-1 Empowered Autogenerator
-1 Aven Cloudchaser
-1 Commander Eesha
-1 Mist Raven
-1 Aven Wind Guide
-1 Ishai, Ojutai Dragonspeaker
-1 Reconnaissance Mission
-1 Skymark Roc
-1 Treetop Sentinel
-1 Airborne Aid
-1 Aven Smokeweaver
-1 Return to Dust
-1 Aven Gagglemaster
-1 Kangee, Sky Warden
-1 Time Wipe
-1 Aerie Mystics
-1 Steel-Plume Marshal
-1 Celestial Gatekeeper
-1 Migratory Route
-1 Gustcloak Savior
-1 Crookclaw Elder
-1 Dovescape
-1 Windbrisk Raptor
-1 Beck
-1 Dusk
+1 Swords to Plowshares
+1 Talisman of Curiosity
+1 Talisman of Progress
+1 Talisman of Unity
+1 Tanuki Transplanter
+1 Teferi's Protection
+1 Temple Garden
+1 The Shire
+1 Thousand Moons Smithy // Barracks of the Thousand
+1 Three Visits
+1 Tranquil Landscape
+1 Unsettled Mariner
+1 Urza, Lord High Artificer
+1 Windswept Heath
+1 Worldwalker Helm
+1 Wrath of God
+1 Yavimaya Coast
+1 Yavimaya, Cradle of Growth
+1 Yoshimaru, Ever Faithful
