@@ -47,7 +47,9 @@ The Deck Manager application is a Python-based tool designed to manage, search, 
     - Set Code (Optional): 3-letter set code.
     - Collector Number (Optional): Specific collector number.
 
+## Example
 
+You can test it on https://grimoire-nuya.onrender.com/
 
 ## Contact
 For any inquiries or issues, please contact [luis.filipe@edu.pucrs.br](mailto:luis.filipe@edu.pucrs.br).
