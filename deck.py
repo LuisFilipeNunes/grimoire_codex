@@ -1,4 +1,4 @@
-from typing import List, Dict, Optional, Union, Any, Set, Tuple
+from typing import List, Dict, Optional, Any, Set, Tuple
 import requests
 import json
 import time
@@ -115,10 +115,13 @@ class Deck:
                     
                     # Link to the card objects
                     for card in self.cards:
-                        if card.set_code is None and card.name.lower() in card_name.lower():
+                        
+                        if card.set_code is None and card.name.lower() == card_name.lower():
                             card.image_url = png_url
-                        if card.collector == collector_number and card.set_code.lower() == set_code.lower():
+                        elif card.collector == collector_number and card.set_code.lower() == set_code.lower():
                             card.image_url = png_url
+                        elif card.set_code is None and card.name.lower() in card_name.lower():
+                            card.image_url = png_url                       
 
                 # Handle cards with 'card_faces'
                 elif 'card_faces' in card_data:
@@ -278,7 +281,6 @@ class Card:
         if card is not None:  
             self.construct_card(card, url)
 
-
     def construct_card(self, card: List[Any], url: Optional[str] = None) -> None:
         # Constructs card attributes
         self.quantity = card[0]
@@ -300,7 +302,6 @@ class Card:
 
     def is_reversible(self) -> bool:
         return self.name.startswith("REV-1-") if self.name else False
-
 class DeckBox:
     def __init__(self, deck_data: Optional[str] = None, deck_name: Optional[str] = None) -> None:
         self.cards_data: Optional[str] = None
@@ -311,7 +312,6 @@ class DeckBox:
             self.cards_data = deck_data  
         if deck_name:
             self.deck_name = deck_name
-        
 
     def __shield_cards(self) -> List[List[Any]]:
         # Returns processed deck list
@@ -349,7 +349,6 @@ class DeckBox:
                         
         self.decklist = deck
 
-   
     def build_deck(self) -> None:
         self.deck = Deck(self.deck_name)
         self.__shield_cards()
